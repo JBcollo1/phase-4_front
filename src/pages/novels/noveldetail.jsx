@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-// import './noveldetail.css'
+import './noveldetail.css'
 
 const Noveldetail = () => {
   const { title } = useParams();
-  const [novel, setNovel] = useState(null); // Single novel object
+  const [novel, setNovel] = useState(null); 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -20,7 +20,7 @@ const Noveldetail = () => {
         return response.json();
       })
       .then(data => {
-        setNovel(data); // Set the novel data
+        setNovel(data); 
         setLoading(false);
       })
       .catch(error => {
@@ -36,7 +36,7 @@ const Noveldetail = () => {
       ) : error ? (
         <p>Error: {error}</p>
       ) : (
-        novel && ( // Ensure novel data is available
+        novel && (
           <div className="novel-details">
             <img src={novel.profile} alt={`${novel.title} cover`} />
             <h2>{novel.title}</h2>
