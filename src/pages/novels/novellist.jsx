@@ -22,3 +22,4 @@ const List = ({ novels }) => {
 };
 
 export default List;
+

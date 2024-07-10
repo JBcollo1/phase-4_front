@@ -7,6 +7,7 @@ import Signup from './pages/Signup';
 import Navbar from './Navbar';
 import List from './pages/novels/novellist';
 import Noveldetail from './pages/novels/noveldetail';
+import AddNovel from './pages/novels/addnovels';
 
 function App() {
   const [novels, setNovels] = useState([]);
@@ -27,6 +28,7 @@ function App() {
         <Route path='/login' element={<Login />} />
         <Route path='/signup' element={<Signup />} />
         <Route path='/novellist/:title' element={<Noveldetail novels = {novels}/>} />
+        <Route path='/addnovel' element={<AddNovel />} />
 
 
       </Routes>
