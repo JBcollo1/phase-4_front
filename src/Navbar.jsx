@@ -17,6 +17,9 @@ function Navbar() {
         <div className="navbar-brand">
           <Link to='/signup'>signup</Link>
         </div>
+        <div className="navbar-brand">
+          <Link to='/novellist'>Novels</Link>
+        </div>
       </div>
     </nav>
   );
