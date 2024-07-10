@@ -3,7 +3,7 @@ import './novellist.css';
 
 const List = ({ novels }) => {
   if (!novels || novels.length === 0) {
-    return <p>No novels available</p>; // Handle the case where there are no novels
+    return <p>No novels available</p>; 
   }
 
   return (
