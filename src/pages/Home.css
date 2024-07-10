@@ -1,0 +1,102 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap');
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-image: url('https://media.istockphoto.com/id/1210557301/photo/magic-book-open.jpg?s=612x612&w=0&k=20&c=2T9x_Z_by3QEeo2DdPOapMUi545Zi10V-eDwg6ToUoI=');
+    background-repeat: no-repeat; 
+    background-size: cover; 
+    background-position: center; 
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.home-container h1,
+.home-container h2,
+.home-container p,
+.home-container button {
+    opacity: 0;
+    margin: 0;
+}
+
+.home-container h1 {
+    animation: fadeIn 2s ease forwards;
+    font-weight: bold;
+    font-size: 5em;
+    line-height: 1.3em;
+}
+
+.home-container h2 {
+    animation: fadeIn 2s ease forwards;
+    font-weight: bold;
+    letter-spacing: 10px;
+    color: #BA0F0F;
+    margin-top: 20px;
+}
+
+.home-container p {
+    animation: fadeIn 2s ease 2s forwards;
+    color: #E61111;
+    margin-top: 20px;
+}
+
+.home-container button {
+    animation: fadeIn 2s ease 4s forwards;
+    height: 40px;
+    margin-top: 20px;
+    border: none;
+    background-color: transparent;
+    color: #eee;
+    border: 1px solid #eee;
+    letter-spacing: 3px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.home-container button:hover {
+    background-color: #eee;
+    color: #333;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.home-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: azure;
+    text-shadow: 0 5px 10px #0004;
+    box-sizing: border-box;
+    padding: 20px;
+    max-width: 90%;
+}
+
+@media (max-width: 768px) {
+    .home-container h1 {
+        font-size: 3em;
+    }
+
+    .home-container h2 {
+        font-size: 1.5em;
+    }
+
+    .home-container p {
+        font-size: 1em;
+    }
+
+    .home-container button {
+        font-size: 0.9em;
+    }
+}
