@@ -4,12 +4,18 @@ import './novellist.css';
 
 const List = ({ novels }) => {
   const addToCollection = async (novelId) => {
-    const token = localStorage.getItem('token'); // Replace with your token management logic
-
+    const token = localStorage.getItem('access_token'); 
+  
+    
+  
+    if (!token || token.split('.').length !== 3) {
+      alert('Invalid token format');
+      return;
+    }
+  
     try {
-      const userId = 1; // Replace with the current user ID
-      const rating = 5; // Set a default rating or retrieve from user input
-
+      const rating = 5; 
+  
       const response = await fetch('http://127.0.0.1:5555/novelcollection/add', {
         method: 'POST',
         headers: {
@@ -17,12 +23,11 @@ const List = ({ novels }) => {
           'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify({
-          user_id: userId,
           novel_id: novelId,
           rating: rating,
         }),
       });
-
+  
       const data = await response.json();
       if (response.ok) {
         alert(data.msg);  // Show a success message
@@ -30,9 +35,11 @@ const List = ({ novels }) => {
         alert(data.msg || 'An error occurred');  // Show an error message
       }
     } catch (error) {
+      console.error('Error:', error);
       alert('An error occurred');
     }
   };
+  
 
   if (!novels || novels.length === 0) {
     return <p>No novels available</p>; 
@@ -55,4 +62,3 @@ const List = ({ novels }) => {
 };
 
 export default List;
-

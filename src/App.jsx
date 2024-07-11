@@ -8,6 +8,7 @@ import Navbar from './Navbar';
 import List from './pages/novels/novellist';
 import Noveldetail from './pages/novels/noveldetail';
 import AddNovel from './pages/novels/addnovels';
+import Appc from './pages/user/novelcollection';
 
 function App() {
   const [novels, setNovels] = useState([]);
@@ -32,6 +33,8 @@ function App() {
         
         <Route path='/novellist/:title' element={<Noveldetail novels = {novels}/>} />
         <Route path='/addnovel' element={<AddNovel />} />
+        <Route path='/appc' element={<Appc />} />
+
 
 
 
