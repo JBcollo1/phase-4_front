@@ -29,7 +29,7 @@ function App() {
 
         <Route path='/signup' element={<SignUp />} />
 
-        <Route path='/signup' element={<Signup />} />
+        
         <Route path='/novellist/:title' element={<Noveldetail novels = {novels}/>} />
         <Route path='/addnovel' element={<AddNovel />} />
 

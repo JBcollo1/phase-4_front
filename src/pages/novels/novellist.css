@@ -16,6 +16,12 @@
   vertical-align: top;
   margin-bottom: 20px;
   text-align: center; /* Center the text */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition */
+}
+
+.novel-card:hover {
+  transform: scale(1.05); /* Scale up slightly */
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2); /* Increase shadow */
 }
 
 .novel-card img {
