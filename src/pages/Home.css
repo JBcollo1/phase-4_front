@@ -12,6 +12,19 @@ body {
     overflow: hidden;
 }
 
+.home-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: azure;
+    text-shadow: 0 5px 10px #0004;
+    box-sizing: border-box;
+    padding: 20px;
+    max-width: 90%;
+}
+
 .home-container h1,
 .home-container h2,
 .home-container p,
@@ -25,6 +38,7 @@ body {
     font-weight: bold;
     font-size: 5em;
     line-height: 1.3em;
+    margin-bottom: 20px; /* Added margin for spacing */
 }
 
 .home-container h2 {
@@ -33,12 +47,14 @@ body {
     letter-spacing: 10px;
     color: #BA0F0F;
     margin-top: 20px;
+    margin-bottom: 20px; /* Added margin for spacing */
 }
 
 .home-container p {
     animation: fadeIn 2s ease 2s forwards;
     color: #E61111;
     margin-top: 20px;
+    margin-bottom: 20px; /* Added margin for spacing */
 }
 
 .home-container button {
@@ -68,19 +84,6 @@ body {
     to {
         opacity: 1;
     }
-}
-
-.home-container {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-    color: azure;
-    text-shadow: 0 5px 10px #0004;
-    box-sizing: border-box;
-    padding: 20px;
-    max-width: 90%;
 }
 
 @media (max-width: 768px) {
