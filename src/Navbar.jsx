@@ -20,6 +20,9 @@ function Navbar() {
         <div className="navbar-brand">
           <Link to='/novellist'>Novels</Link>
         </div>
+        <div className="navbar-brand">
+          <Link to='/addnovel'>Add</Link>
+        </div>
       </div>
     </nav>
   );

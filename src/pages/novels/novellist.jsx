@@ -10,7 +10,7 @@ const List = ({ novels }) => {
     <div className="novel-list">
       {novels.map(novel => (
         <div className="novel-card" key={novel.id}>
-          <Link to={`/novel/${novel.title}`}>
+          <Link to={`/novellist/${novel.title}`}>
             <img src={novel.profile} alt={`${novel.title} cover`} />
           </Link>
           <h2>{novel.title}</h2>
@@ -22,3 +22,4 @@ const List = ({ novels }) => {
 };
 
 export default List;
+

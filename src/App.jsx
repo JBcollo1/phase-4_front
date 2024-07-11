@@ -6,6 +6,8 @@ import Login from './pages/Login';
 import SignUp from './pages/SignUp';
 import Navbar from './Navbar';
 import List from './pages/novels/novellist';
+import Noveldetail from './pages/novels/noveldetail';
+import AddNovel from './pages/novels/addnovels';
 
 function App() {
   const [novels, setNovels] = useState([]);
@@ -13,9 +15,9 @@ function App() {
   useEffect(() => {
     fetch('http://127.0.0.1:5555/novels/list')
       .then(res => res.json())
-      .then(data => setNovels(data.novels)) // Assuming the API response is an object with a `novels` array
+      .then(data => setNovels(data.novels)) 
       .catch(error => console.error('Error fetching novels', error));
-  }, []); // Add an empty dependency array to run the effect only once
+  }, []); 
 
   return (
     <>
@@ -24,7 +26,15 @@ function App() {
         <Route path='/' element={<Home />} />
         <Route path='/novellist' element={<List novels={novels} />} />
         <Route path='/login' element={<Login />} />
+
         <Route path='/signup' element={<SignUp />} />
+
+        <Route path='/signup' element={<Signup />} />
+        <Route path='/novellist/:title' element={<Noveldetail novels = {novels}/>} />
+        <Route path='/addnovel' element={<AddNovel />} />
+
+
+
       </Routes>
     </>
   );

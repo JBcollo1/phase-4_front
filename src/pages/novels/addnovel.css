@@ -1,5 +1,5 @@
-/* Style for the login box */
-.login-box {
+/* Style for the add novel form */
+.add-novel-form {
     width: 300px;
     padding: 40px;
     position: absolute;
@@ -12,21 +12,22 @@
     box-shadow: 0 15px 25px rgba(0, 0, 0, 0.5);
   }
   
-  /* Style for the h2 element inside the login box */
-  .login-box h2 {
+  /* Style for the h2 element inside the add novel form */
+  .add-novel-form h2 {
     margin: 0 0 30px;
     padding: 0;
     color: #fff;
     text-transform: uppercase;
   }
   
-  /* Style for the user box inside the login box */
-  .login-box .user-box {
+  /* Style for the form group inside the add novel form */
+  .add-novel-form .form-group {
     position: relative;
   }
   
-  /* Style for the input fields inside the user box */
-  .login-box .user-box input {
+  /* Style for the input fields inside the form group */
+  .add-novel-form .form-group input,
+  .add-novel-form .form-group textarea {
     width: 100%;
     padding: 10px 0;
     font-size: 16px;
@@ -38,8 +39,8 @@
     background: transparent;
   }
   
-  /* Style for the labels inside the user box */
-  .login-box .user-box label {
+  /* Style for the labels inside the form group */
+  .add-novel-form .form-group label {
     position: absolute;
     top: 0;
     left: 0;
@@ -51,8 +52,10 @@
   }
   
   /* Animation for the labels when input fields are focused or not empty */
-  .login-box .user-box input:focus ~ label,
-  .login-box .user-box input:valid ~ label {
+  .add-novel-form .form-group input:focus ~ label,
+  .add-novel-form .form-group input:valid ~ label,
+  .add-novel-form .form-group textarea:focus ~ label,
+  .add-novel-form .form-group textarea:valid ~ label {
     top: -20px;
     left: 0;
     color: #03e9f4;
@@ -60,7 +63,7 @@
   }
   
   /* Style for the submit button with animation */
-  .login-box a {
+  .add-novel-form button {
     position: relative;
     display: inline-block;
     padding: 10px 20px;
@@ -73,9 +76,12 @@
     margin-top: 40px;
     letter-spacing: 4px;
     border-radius: 5px;
+    border: none;
+    background: #000;
+    cursor: pointer;
   }
   
-  .login-box a:hover {
+  .add-novel-form button:hover {
     background: #03e9f4;
     color: #fff;
     border-radius: 5px;
@@ -85,12 +91,12 @@
                 0 0 100px #03e9f4;
   }
   
-  .login-box a span {
+  .add-novel-form button span {
     position: absolute;
     display: block;
   }
   
-  .login-box a span:nth-child(1) {
+  .add-novel-form button span:nth-child(1) {
     top: 0;
     left: -100%;
     width: 100%;
@@ -99,7 +105,7 @@
     animation: btn-anim1 1s linear infinite;
   }
   
-  .login-box a span:nth-child(2) {
+  .add-novel-form button span:nth-child(2) {
     top: -100%;
     right: 0;
     width: 2px;
@@ -109,7 +115,7 @@
     animation-delay: 0.25s;
   }
   
-  .login-box a span:nth-child(3) {
+  .add-novel-form button span:nth-child(3) {
     bottom: 0;
     right: -100%;
     width: 100%;
@@ -119,7 +125,7 @@
     animation-delay: 0.5s;
   }
   
-  .login-box a span:nth-child(4) {
+  .add-novel-form button span:nth-child(4) {
     bottom: -100%;
     left: 0;
     width: 2px;
@@ -164,5 +170,17 @@
     50%, 100% {
       bottom: 100%;
     }
+  }
+  
+  /* Style for error and info messages */
+  .add-novel-form .error,
+  .add-novel-form .info {
+    color: #dc3545;
+    margin-top: 10px;
+    text-align: center;
+  }
+  
+  .add-novel-form .info {
+    color: #28a745;
   }
   

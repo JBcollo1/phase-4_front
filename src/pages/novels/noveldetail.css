@@ -1,0 +1,63 @@
+.novel-card-2 {
+  background-color: #141313;
+  margin-top: 70px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  align-items: center;
+  text-align: center;
+  width: 90%;
+  max-width: 800px;
+  height: 80vh; /* Adjusted height to 80% of the viewport height */
+  overflow-y: auto; 
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+}
+
+.novel-profile {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  width: 150px;
+  height: auto; /* Ensure the image retains its aspect ratio */
+  border-radius: 8px;
+}
+
+.novel-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.novel-info {
+  text-align: left;
+  width: 100%;
+  max-width: 600px;
+  padding: 0 20px;
+}
+
+.novel-info h2 {
+  background-color: whitesmoke;
+  color: black;
+  padding: 10px;
+  border-radius: 5px;
+  margin-top: 20px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.back-link {
+  display: inline-block;
+  margin-top: 20px;
+  text-decoration: none;
+  color: #007bff;
+  font-weight: bold;
+}
+
+.back-link:hover {
+  text-decoration: underline;
+  color: red;
+}
