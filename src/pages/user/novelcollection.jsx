@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import './novelcollection.css';
 
 const Appc = () => {
@@ -6,7 +6,10 @@ const Appc = () => {
   const [userId, setUserId] = useState(null);
   const [userProfile, setUserProfile] = useState({});
   const [loggedIn, setLoggedIn] = useState(true);
+
+  const [ratings, setRatings] = useState({}); 
   const [ratings, setRatings] = useState({});
+
 
   useEffect(() => {
     const fetchUserId = async () => {
