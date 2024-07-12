@@ -1,6 +1,5 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import './novellist.css';
 
 const List = ({ novels }) => {
@@ -15,7 +14,7 @@ const List = ({ novels }) => {
   );
 
   const addToCollection = async (novelId) => {
-    const token = localStorage.getItem('access_token');
+    const token = localStorage.getItem('access_token'); 
 
     if (!token || token.split('.').length !== 3) {
       alert('Invalid token format');
@@ -23,7 +22,7 @@ const List = ({ novels }) => {
     }
 
     try {
-      const rating = 5;
+      const rating = 5; 
 
       const response = await fetch('http://127.0.0.1:5555/novelcollection/add', {
         method: 'POST',
@@ -39,9 +38,9 @@ const List = ({ novels }) => {
 
       const data = await response.json();
       if (response.ok) {
-        alert(data.msg);  // Show a success message
+        alert(data.msg);
       } else {
-        alert(data.msg || 'An error occurred');  // Show an error message
+        alert(data.msg || 'An error occurred');
       }
     } catch (error) {
       console.error('Error:', error);
@@ -50,39 +49,36 @@ const List = ({ novels }) => {
   };
 
   if (!novels || novels.length === 0) {
-    return <p>No novels available</p>;
+    return <p>No novels available</p>; 
   }
 
   return (
-    <div className="novel-list">
+    <div className="novel-container">
       <input
         type="text"
-        placeholder="Search novels"
+        placeholder="Search for novels..."
         value={searchQuery}
         onChange={handleSearchChange}
-        className="search-bar"
+        className="search-input"
       />
-      {filteredNovels.map(novel => (
-        <div className="novel-card" key={novel.id}>
-          <Link to={`/novellist/${novel.id}`}>
-            <img src={novel.profile} alt={`${novel.title} cover`} />
-          </Link>
-          <h2>{novel.title}</h2>
-          <p><strong>Genre:</strong> {novel.genre}</p>
-          <button onClick={() => addToCollection(novel.id)}>Add to Collection</button>
-        </div>
-      ))}
+      <div className="novel-grid">
+        {filteredNovels.length > 0 ? (
+          filteredNovels.map(novel => (
+            <div className="novel-item" key={novel.id}>
+              <Link to={`/novellist/${novel.title}`}>
+                <img src={novel.profile} alt={`${novel.title} cover`} className="novel-image"/>
+              </Link>
+              <h2 className="novel-title">{novel.title}</h2>
+              <p className="novel-genre"><strong>Genre:</strong> {novel.genre}</p>
+              <button className="novel-button" onClick={() => addToCollection(novel.id)}>Add to Collection</button>
+            </div>
+          ))
+        ) : (
+          <p className="no-novels">No novels match your search criteria</p>
+        )}
+      </div>
     </div>
   );
-};
-
-List.propTypes = {
-  novels: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
-    title: PropTypes.string.isRequired,
-    genre: PropTypes.string.isRequired,
-    profile: PropTypes.string.isRequired
-  })).isRequired,
 };
 
 export default List;
