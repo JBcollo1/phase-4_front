@@ -7,7 +7,10 @@ const Appc = () => {
   const [userId, setUserId] = useState(null);
   const [userProfile, setUserProfile] = useState({});
   const [loggedIn, setLoggedIn] = useState(true);
-  const [ratings, setRatings] = useState({});
+
+  const [ratings, setRatings] = useState({}); 
+  
+
 
   useEffect(() => {
     const fetchUserId = async () => {
