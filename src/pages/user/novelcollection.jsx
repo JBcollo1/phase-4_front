@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import './novelcollection.css';
 
 const Appc = () => {
@@ -132,11 +133,11 @@ const Appc = () => {
         throw new Error('No token found');
       }
 
-      // Log the details
-      console.log('Collection ID:', collectionId);
-      console.log('Novel ID:', novelId);
-      console.log('New Rating:', newRating);
-      console.log('Token:', token);
+      
+      // console.log('Collection ID:', collectionId);
+      // console.log('Novel ID:', novelId);
+      // console.log('New Rating:', newRating);
+      // console.log('Token:', token);
 
       const response = await fetch(`http://127.0.0.1:5555/novelcollection/update/${collectionId}`, {
         method: 'PUT',
@@ -175,17 +176,18 @@ const Appc = () => {
     return <h1>Please log in</h1>;
   }
 
-  console.log('Books Data:', books);  // Log the books data
+  // console.log('Books Data:', books);  
 
   return (
     <div className="appc-container">
       <div className="user-profile">
         <h2>{userProfile.username}</h2>
+        
         <img src={userProfile.profile} alt={`${userProfile.username}'s profile`} />
       </div>
       <div className="novel-list">
         {books.map((book) => {
-          console.log('Book Object:', book);  // Log the book object
+          // console.log('Book Object:', book);  
           return (
             <div key={book.id} className="novel-card">
               <img src={book.novel.profile} alt={book.novel.title} />
