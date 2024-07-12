@@ -1,36 +1,132 @@
-/* Appc.css */
-
+/* Basic body styling */
 body {
     font-family: Arial, sans-serif;
     background-color: #f0f0f0;
     color: #333;
     margin: 0;
     padding: 20px;
+    overflow: auto; /* Ensure that overflow allows scrolling */
   }
   
-  h1 {
+  /* Main container for the app */
+  .appc-container {
     text-align: center;
-    color: #4CAF50;
-    margin-bottom: 20px;
+    overflow: auto; /* Allow scrolling if needed */
   }
   
-  ul {
-    list-style: none;
-    padding: 0;
-  }
-  
-  li {
-    background-color: #fff;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin-bottom: 10px;
-    padding: 10px 15px;
+  /* User profile styling */
+  .user-profile {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: flex-start; /* Align items to the start */
+    margin-bottom: 20px;
+    gap: 10px; /* Space between avatar and text */
   }
   
-  li button {
+  .user-profile img {
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+  }
+  
+  .user-profile .user-details {
+    text-align: left; /* Align text to the left */
+  }
+  
+  .user-profile h2 {
+    margin: 0;
+    font-size: 1.5em;
+  }
+  
+  .user-profile p {
+    margin: 5px 0;
+    color: #666; /* Slightly lighter color for email */
+  }
+  
+  /* Container for the list of novels */
+  .novel-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 20px;
+    padding-bottom: 20px; /* Add padding to ensure content doesn't overlap */
+  }
+  
+  /* Card style for each novel */
+  .novel-card {
+    width: calc(50% - 20px); 
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: #0c0c0c;
+    display: inline-block;
+    vertical-align: top;
+    margin-bottom: 20px;
+    text-align: center; /* Center the text */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition */
+  }
+  
+  /* Hover effects for the card */
+  .novel-card:hover {
+    transform: scale(1.05); /* Scale up slightly */
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2); /* Increase shadow */
+  }
+  
+  /* Image styling */
+  .novel-card img {
+    width: 100%;
+    height: auto; /* Maintain aspect ratio */
+    object-fit: cover;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+  }
+  
+  /* Title and text styling */
+  .novel-card h2,
+  .novel-card p {
+    margin: 10px;
+  }
+  
+  .novel-card h2 {
+    font-size: 1.5em;
+    margin-bottom: 0.5em;
+  }
+  
+  .novel-card p {
+    font-size: 1em;
+  }
+  
+/* Star rating section */
+.novel-card .rating {
+    margin: 10px;
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+  }
+  
+  .novel-card .star {
+    font-size: 24px;
+    color: #ccc;
+    cursor: pointer;
+    transition: color 0.3s ease;
+  }
+  
+  .novel-card .star.on {
+    color: #ff0; /* Yellow for stars representing current rating */
+  }
+  
+  .novel-card .star:hover {
+    color: #f5c518; /* Highlight color on hover */
+  }
+  
+  .novel-card .star:focus {
+    outline: none;
+  }
+  
+  
+  /* Button styling */
+  button {
     background-color: #f44336;
     color: #fff;
     border: none;
@@ -38,24 +134,45 @@ body {
     padding: 5px 10px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    margin-top: 10px; /* Add margin to separate from text */
   }
   
-  li button:hover {
+  button:hover {
     background-color: #d32f2f;
   }
   
-  li button:focus {
+  button:focus {
     outline: none;
   }
   
+  /* Loading spinner */
+  .loading-spinner {
+    margin: 20px;
+  }
+  
+  /* Add media query for responsiveness */
   @media (max-width: 600px) {
-    li {
-      flex-direction: column;
-      align-items: flex-start;
+    .novel-card {
+      width: 100%; /* Full width for small screens */
     }
   
-    li button {
-      margin-top: 10px;
+    .novel-card img {
+      height: 150px; /* Adjust height for smaller screens */
+      object-fit: cover;
+    }
+  
+    /* Stack user profile elements vertically on small screens */
+    .user-profile {
+      flex-direction: column;
+      align-items: center; /* Center align items */
+    }
+  
+    .user-profile img {
+      margin-bottom: 10px; /* Space between avatar and text */
+    }
+  
+    .user-profile .user-details {
+      text-align: center; /* Center text on small screens */
     }
   }
   
