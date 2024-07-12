@@ -23,6 +23,9 @@ function Navbar() {
         <div className="navbar-brand">
           <Link to='/addnovel'>Add</Link>
         </div>
+        <div className="navbar-brand">
+          <Link to='/appc'>My collection</Link>
+        </div>
       </div>
     </nav>
   );
