@@ -51,7 +51,7 @@ const AddNovel = () => {
     const refreshToken = localStorage.getItem('refresh_token');
 
     try {
-      let response = await fetch('http://127.0.0.1:5555/novels/addnovel', {
+      let response = await fetch('https://phase-4-project-0zcg.onrender.com/novels/addnovel', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

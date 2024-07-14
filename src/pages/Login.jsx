@@ -22,7 +22,7 @@ const Login = () => {
   const handleSubmit = async (values, { setSubmitting, setErrors }) => {
     const { email, password } = values;
 
-    const response = await fetch('http://127.0.0.1:5555/logs/login', {
+    const response = await fetch('https://phase-4-project-0zcg.onrender.com/logs/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

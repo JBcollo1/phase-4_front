@@ -14,7 +14,7 @@ function App() {
   const [novels, setNovels] = useState([]);
 
   useEffect(() => {
-    fetch('http://127.0.0.1:5555/novels/list')
+    fetch('https://phase-4-project-0zcg.onrender.com/novels/list')
       .then(res => res.json())
       .then(data => setNovels(data.novels)) 
       .catch(error => console.error('Error fetching novels', error));

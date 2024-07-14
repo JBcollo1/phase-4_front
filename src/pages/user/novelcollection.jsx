@@ -17,7 +17,7 @@ const Appc = () => {
           throw new Error('No token found');
         }
 
-        const response = await fetch('http://127.0.0.1:5555/novelcollection/getUserId', {
+        const response = await fetch('https://phase-4-project-0zcg.onrender.com/novelcollection/getUserId', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -50,7 +50,7 @@ const Appc = () => {
   const fetchUserProfile = async () => {
     try {
       const token = localStorage.getItem('access_token');
-      const response = await fetch(`http://127.0.0.1:5555/novelcollection/getuserdetails`, {
+      const response = await fetch(`https://phase-4-project-0zcg.onrender.com/novelcollection/getuserdetails`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -76,7 +76,7 @@ const Appc = () => {
         throw new Error('No token found');
       }
 
-      const response = await fetch(`http://127.0.0.1:5555/novelcollection/user/${userId}`, {
+      const response = await fetch(`https://phase-4-project-0zcg.onrender.com/novelcollection/user/${userId}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -108,7 +108,7 @@ const Appc = () => {
         throw new Error('No token found');
       }
 
-      const response = await fetch(`http://127.0.0.1:5555/novelcollection/delete/${collectionId}`, {
+      const response = await fetch(`https://phase-4-project-0zcg.onrender.com/novelcollection/delete/${collectionId}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
@@ -133,7 +133,7 @@ const Appc = () => {
         throw new Error('No token found');
       }
 
-      const response = await fetch(`http://127.0.0.1:5555/novelcollection/update/${collectionId}`, {
+      const response = await fetch(`https://phase-4-project-0zcg.onrender.com/novelcollection/update/${collectionId}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

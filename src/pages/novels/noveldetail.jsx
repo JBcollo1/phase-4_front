@@ -12,7 +12,7 @@ const Noveldetail = () => {
     setLoading(true);
     setError(null);
 
-    fetch(`http://127.0.0.1:5555/novels/name/${title}`)
+    fetch(`https://phase-4-project-0zcg.onrender.com/novels/name/${title}`)
       .then(response => {
         if (!response.ok) {
           throw new Error('Failed to fetch novel info');

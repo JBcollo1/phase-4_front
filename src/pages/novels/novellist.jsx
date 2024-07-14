@@ -24,7 +24,7 @@ const List = ({ novels }) => {
     try {
       const rating = 5; 
 
-      const response = await fetch('http://127.0.0.1:5555/novelcollection/add', {
+      const response = await fetch('https://phase-4-project-0zcg.onrender.com/novelcollection/add', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
