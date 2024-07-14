@@ -128,6 +128,23 @@
     animation: btn-anim4 1s linear infinite;
     animation-delay: 0.75s;
   }
+  .form-field {
+    width: 100%;
+    padding: 0.5em;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .error-message {
+    color: red;
+    font-size: 0.75em;
+  }
+  
+  .error {
+    color: red;
+    margin-top: 0.5em;
+  }
+  
   
   /* Keyframes for button animation */
   @keyframes btn-anim1 {

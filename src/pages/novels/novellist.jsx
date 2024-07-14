@@ -17,7 +17,7 @@ const List = ({ novels }) => {
     const token = localStorage.getItem('access_token'); 
 
     if (!token || token.split('.').length !== 3) {
-      alert('Invalid token format');
+      alert('please login');
       return;
     }
 

@@ -15,8 +15,22 @@
 .novel-container {
   display: flex;
   flex-direction: column;
+  background-color: wheat;
+  margin-top: 70px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 10px;
   align-items: center;
-  width: 100%;
+  text-align: center;
+  width: 90%;
+  max-width: 800px;
+  height: 90vh; /* Adjusted height to 80% of the viewport height */
+  overflow-y: auto; 
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
 }
 
 /* List of novels */

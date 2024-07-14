@@ -1,14 +1,26 @@
-import { useState } from 'react';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
 import './Login.css';
 
 const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState(null);
+  // Simple validation function
+  const validate = (values) => {
+    const errors = {};
+    if (!values.email) {
+      errors.email = 'Email is required';
+    } else if (!/\S+@\S+\.\S+/.test(values.email)) {
+      errors.email = 'Invalid email address';
+    }
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setError(null);
+    if (!values.password) {
+      errors.password = 'Password is required';
+    }
+
+    return errors;
+  };
+
+  // Handle form submission
+  const handleSubmit = async (values, { setSubmitting, setErrors }) => {
+    const { email, password } = values;
 
     const response = await fetch('http://127.0.0.1:5555/logs/login', {
       method: 'POST',
@@ -21,49 +33,55 @@ const Login = () => {
     const data = await response.json();
 
     if (!response.ok) {
-      setError(data.msg || 'Login failed');
+      setErrors({ submit: data.msg || 'Login failed' });
     } else {
-      
       localStorage.setItem('access_token', data.access_token);
       localStorage.setItem('refresh_token', data.refresh_token);
-      
-      window.location.href = '/'; 
+      window.location.href = '/';
     }
+
+    setSubmitting(false);
   };
 
   return (
     <div className="login-box">
       <h2>Login</h2>
-      <form onSubmit={handleSubmit}>
-        <div className="user-box">
-          <input
-            type="text"
-            name="email"
-            required
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <label>Email</label>
-        </div>
-        <div className="user-box">
-          <input
-            type="password"
-            name="password"
-            required
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <label>Password</label>
-        </div>
-        <button type="submit">
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-          Submit
-        </button>
-        {error && <p className="error">{error}</p>}
-      </form>
+      <Formik
+        initialValues={{ email: '', password: '' }}
+        validate={validate}
+        onSubmit={handleSubmit}
+      >
+        {({ isSubmitting }) => (
+          <Form>
+            <div className="user-box">
+              <Field
+                type="text"
+                name="email"
+                className="form-field"
+              />
+              <label>Email</label>
+              <ErrorMessage name="email" component="div" className="error-message" />
+            </div>
+            <div className="user-box">
+              <Field
+                type="password"
+                name="password"
+                className="form-field"
+              />
+              <label>Password</label>
+              <ErrorMessage name="password" component="div" className="error-message" />
+            </div>
+            <button type="submit" disabled={isSubmitting}>
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+              Submit
+            </button>
+            <ErrorMessage name="submit" component="p" className="error" />
+          </Form>
+        )}
+      </Formik>
     </div>
   );
 };

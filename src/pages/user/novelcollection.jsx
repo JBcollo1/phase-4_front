@@ -7,10 +7,7 @@ const Appc = () => {
   const [userId, setUserId] = useState(null);
   const [userProfile, setUserProfile] = useState({});
   const [loggedIn, setLoggedIn] = useState(true);
-
   const [ratings, setRatings] = useState({}); 
-  
-
 
   useEffect(() => {
     const fetchUserId = async () => {
@@ -136,12 +133,6 @@ const Appc = () => {
         throw new Error('No token found');
       }
 
-      
-      // console.log('Collection ID:', collectionId);
-      // console.log('Novel ID:', novelId);
-      // console.log('New Rating:', newRating);
-      // console.log('Token:', token);
-
       const response = await fetch(`http://127.0.0.1:5555/novelcollection/update/${collectionId}`, {
         method: 'PUT',
         headers: {
@@ -179,29 +170,25 @@ const Appc = () => {
     return <h1>Please log in</h1>;
   }
 
-  // console.log('Books Data:', books);  
-
   return (
-    <div className="appc-container">
+    <div className="boddy">
       <div className="user-profile">
-        <h2>{userProfile.username}</h2>
-        
         <img src={userProfile.profile} alt={`${userProfile.username}'s profile`} />
+        <div className="user-details">
+          <h2>{userProfile.username}</h2>
+        </div>
       </div>
       <div className="novel-list">
-        {books.map((book) => {
-          // console.log('Book Object:', book);  
-          return (
-            <div key={book.id} className="novel-card">
-              <img src={book.novel.profile} alt={book.novel.title} />
-              <h2>{book.novel.title}</h2>
-              <p>Author: {book.novel.author}</p>
-              <p>Genre: {book.novel.genre}</p>
-              {renderStars(book.id, book.novel_id, ratings[book.id])}
-              <button onClick={() => removeBook(book.id)}>Remove</button>
-            </div>
-          );
-        })}
+        {books.map((book) => (
+          <div key={book.id} className="novel-card">
+            <img src={book.novel.profile} alt={book.novel.title} />
+            <h2>{book.novel.title}</h2>
+            <p>Author: {book.novel.author}</p>
+            <p>Genre: {book.novel.genre}</p>
+            {renderStars(book.id, book.novel_id, ratings[book.id])}
+            <button onClick={() => removeBook(book.id)}>Remove</button>
+          </div>
+        ))}
       </div>
     </div>
   );

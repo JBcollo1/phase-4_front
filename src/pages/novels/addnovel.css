@@ -136,6 +136,29 @@
   }
   
   /* Keyframes for button animation */
+
+  .form-field {
+    width: 100%;
+    padding: 0.5em;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .error-message {
+    color: red;
+    font-size: 0.75em;
+  }
+  
+  .info {
+    color: green;
+    margin-top: 0.5em;
+  }
+  
+  .error {
+    color: red;
+    margin-top: 0.5em;
+  }
+  
   @keyframes btn-anim1 {
     0% {
       left: -100%;

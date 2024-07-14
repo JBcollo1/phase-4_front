@@ -1,22 +1,42 @@
-import { useState } from 'react';
-import './addnovel.css'; 
-
-
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import './addnovel.css';
 
 const AddNovel = () => {
-  const [title, setTitle] = useState('');
-  const [genre, setGenre] = useState('');
-  const [author, setAuthor] = useState('');
-  const [profile, setProfile] = useState(''); // For storing image URL
-  const [publicationYear, setPublicationYear] = useState('');
-  const [synopsis, setSynopsis] = useState('');
-  const [error, setError] = useState(null);
-  const [info, setInfo] = useState(null);
+  // Simple validation function
+  const validate = (values) => {
+    const errors = {};
+    if (!values.title) {
+      errors.title = 'Title is required';
+    }
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setError(null);
-    setInfo(null);
+    if (!values.genre) {
+      errors.genre = 'Genre is required';
+    }
+
+    if (!values.author) {
+      errors.author = 'Author is required';
+    }
+
+    if (!values.profile) {
+      errors.profile = 'Profile URL is required';
+    }
+
+    if (!values.publicationYear) {
+      errors.publicationYear = 'Publication Year is required';
+    } else if (!/^\d{4}$/.test(values.publicationYear)) {
+      errors.publicationYear = 'Publication Year must be a 4-digit year';
+    }
+
+    if (!values.synopsis) {
+      errors.synopsis = 'Synopsis is required';
+    }
+
+    return errors;
+  };
+
+  // Handle form submission
+  const handleSubmit = async (values, { setSubmitting, setErrors, setStatus }) => {
+    const { title, genre, author, profile, publicationYear, synopsis } = values;
 
     const data = {
       title,
@@ -40,94 +60,98 @@ const AddNovel = () => {
         body: JSON.stringify(data)
       });
 
-    
-
       const responseData = await response.json();
 
       if (!response.ok) {
-        setError(responseData.msg || 'Failed to add novel');
+        setErrors({ submit: responseData.msg || 'Failed to add novel' });
       } else {
-        setInfo('Novel added successfully');
-        setTitle('');
-        setGenre('');
-        setAuthor('');
-        setProfile('');
-        setPublicationYear('');
-        setSynopsis('');
+        setStatus({ success: 'Novel added successfully' });
+        // Reset form fields
+        setSubmitting(false);
       }
     } catch (error) {
       console.error('Error adding novel:', error);
-      setError('Failed to add novel');
+      setErrors({ submit: 'Failed to add novel' });
+      setSubmitting(false);
     }
   };
 
   return (
     <div className="add-novel-form">
       <h2>Add Novel</h2>
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <input
-            type="text"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            required
-          />
-          <label>Title</label>
-        </div>
-        <div className="form-group">
-          <input
-            type="text"
-            value={genre}
-            onChange={(e) => setGenre(e.target.value)}
-            required
-          />
-          <label>Genre</label>
-        </div>
-        <div className="form-group">
-          <input
-            type="text"
-            value={author}
-            onChange={(e) => setAuthor(e.target.value)}
-            required
-          />
-          <label>Author</label>
-        </div>
-        <div className="form-group">
-          <input
-            type="text"
-            value={profile}
-            onChange={(e) => setProfile(e.target.value)}
-            required
-          />
-          <label>Profile</label>
-        </div>
-        <div className="form-group">
-          <input
-            type="number"
-            value={publicationYear}
-            onChange={(e) => setPublicationYear(e.target.value)}
-            required
-          />
-          <label>Publication Year</label>
-        </div>
-        <div className="form-group">
-          <textarea
-            value={synopsis}
-            onChange={(e) => setSynopsis(e.target.value)}
-            required
-          ></textarea>
-          <label>Synopsis</label>
-        </div>
-        <button type="submit">
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-          Submit
-        </button>
-        {error && <div className="error">{error}</div>}
-        {info && <div className="info">{info}</div>}
-      </form>
+      <Formik
+        initialValues={{ title: '', genre: '', author: '', profile: '', publicationYear: '', synopsis: '' }}
+        validate={validate}
+        onSubmit={handleSubmit}
+      >
+        {({ isSubmitting, status }) => (
+          <Form>
+            <div className="form-group">
+              <Field
+                type="text"
+                name="title"
+                className="form-field"
+              />
+              <label>Title</label>
+              <ErrorMessage name="title" component="div" className="error-message" />
+            </div>
+            <div className="form-group">
+              <Field
+                type="text"
+                name="genre"
+                className="form-field"
+              />
+              <label>Genre</label>
+              <ErrorMessage name="genre" component="div" className="error-message" />
+            </div>
+            <div className="form-group">
+              <Field
+                type="text"
+                name="author"
+                className="form-field"
+              />
+              <label>Author</label>
+              <ErrorMessage name="author" component="div" className="error-message" />
+            </div>
+            <div className="form-group">
+              <Field
+                type="text"
+                name="profile"
+                className="form-field"
+              />
+              <label>Profile</label>
+              <ErrorMessage name="profile" component="div" className="error-message" />
+            </div>
+            <div className="form-group">
+              <Field
+                type="number"
+                name="publicationYear"
+                className="form-field"
+              />
+              <label>Publication Year</label>
+              <ErrorMessage name="publicationYear" component="div" className="error-message" />
+            </div>
+            <div className="form-group">
+              <Field
+                as="textarea"
+                name="synopsis"
+                className="form-field"
+              />
+              <label>Synopsis</label>
+              <ErrorMessage name="synopsis" component="div" className="error-message" />
+            </div>
+            <button type="submit" disabled={isSubmitting}>
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+              Submit
+            </button>
+            {status && status.success && <div className="info">{status.success}</div>}
+            <ErrorMessage name="submit" component="div" className="error" />
+          </Form>
+        )}
+      </Formik>
     </div>
   );
 };

@@ -1,12 +1,22 @@
 /* Basic body styling */
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
-    color: #333;
-    margin: 0;
-    padding: 20px;
-    overflow: auto; /* Ensure that overflow allows scrolling */
-  }
+.boddy {
+  background-color: wheat;
+  margin-top: 70px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  align-items: center;
+  text-align: center;
+  width: 90%;
+  max-width: 800px;
+  height: 90vh; /* Adjusted height to 80% of the viewport height */
+  overflow-y: auto; 
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+}
   
   /* Main container for the app */
   .appc-container {
@@ -55,7 +65,7 @@ body {
   
   /* Card style for each novel */
   .novel-card {
-    width: calc(50% - 20px); 
+    width: calc(25% - 10px); 
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
     overflow: hidden;
