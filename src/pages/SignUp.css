@@ -83,3 +83,7 @@ body {
   .register-btn:hover, .reset-btn:hover {
   opacity: 0.9;
   }
+  .error-message {
+    color: red;
+    margin-top: 0.5rem;
+  }

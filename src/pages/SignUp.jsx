@@ -1,116 +1,153 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { Formik, Field, Form, ErrorMessage } from 'formik';
 import './SignUp.css';
 
 const SignUp = () => {
-    const [username, setUsername] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
-    const [profile, setProfile] = useState('');
-    const [errorMessage, setErrorMessage] = useState('');
-
     const getRandomColor = () => {
         return '#' + Math.floor(Math.random() * 16777215).toString(16);
     };
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        if (password !== confirmPassword) {
-            setErrorMessage('Passwords do not match!');
-        } else {
-            setErrorMessage('');
-            if (!profile) {
-                setProfile(getRandomColor());
-            }
-            try {
-                const res = await fetch('http://127.0.0.1:5555/logs/signup', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ username, email, password, profile })
-                });
-
-                if (res.ok) {
-                    alert('Form submitted successfully!');
-                    
-                } else {
-                    alert('Failed to submit the form!');
-                    
-                }
-            } catch (error) {
-                console.error('Error submitting the form:', error);
-                alert('Error submitting the form!');
-            }
+    // Custom validation function
+    const validate = (values) => {
+        const errors = {};
+        
+        // Username validation
+        if (!values.username) {
+            errors.username = 'Username is required';
         }
-    };
 
-    const handleReset = () => {
-        setUsername('');
-        setEmail('');
-        setPassword('');
-        setConfirmPassword('');
-        setProfile('');
-        setErrorMessage('');
+        // Email validation
+        if (!values.email) {
+            errors.email = 'Email is required';
+        } else if (!/\S+@\S+\.\S+/.test(values.email)) {
+            errors.email = 'Invalid email address';
+        }
+
+        // Password validation
+        if (!values.password) {
+            errors.password = 'Password is required';
+        } else if (values.password.length < 6) {
+            errors.password = 'Password must be at least 6 characters';
+        }
+
+        // Confirm Password validation
+        if (!values.confirmPassword) {
+            errors.confirmPassword = 'Confirm Password is required';
+        } else if (values.confirmPassword !== values.password) {
+            errors.confirmPassword = 'Passwords must match';
+        }
+
+        return errors;
     };
 
     return (
         <div className="sign-up-container">
-            <form className="sign-up-form" onSubmit={handleSubmit}>
-                <h2>Registration Form</h2>
-                <div className="input-container">
-                    <i className="fa fa-user icon"></i>
-                    <input
-                        type="text"
-                        placeholder="Username"
-                        value={username}
-                        onChange={(e) => setUsername(e.target.value)}
-                        required
-                    />
-                </div>
-                <div className="input-container">
-                    <i className="fa fa-envelope icon"></i>
-                    <input
-                        type="email"
-                        placeholder="Email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        required
-                    />
-                </div>
-                <div className="input-container">
-                    <i className="fa fa-lock icon"></i>
-                    <input
-                        type="password"
-                        placeholder="Password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        required
-                    />
-                </div>
-                <div className="input-container">
-                    <i className="fa fa-lock icon"></i>
-                    <input
-                        type="password"
-                        placeholder="Confirm Password"
-                        value={confirmPassword}
-                        onChange={(e) => setConfirmPassword(e.target.value)}
-                        required
-                    />
-                </div>
-                <div className="input-container">
-                    <i className="fa fa-user-circle icon"></i>
-                    <input
-                        type="text"
-                        placeholder="Profile"
-                        value={profile}
-                        onChange={(e) => setProfile(e.target.value)}
-                    />
-                </div>
-                <button type="submit" className="register-btn">Register</button>
-                <button type="button" className="reset-btn" onClick={handleReset}>Reset</button>
-                {errorMessage && <p className="error-message">{errorMessage}</p>}
-            </form>
+            <Formik
+                initialValues={{
+                    username: '',
+                    email: '',
+                    password: '',
+                    confirmPassword: '',
+                    profile: ''
+                }}
+                validate={validate}
+                onSubmit={async (values, { setSubmitting, resetForm }) => {
+                    const { username, email, password, profile } = values;
+                    const profileColor = profile || getRandomColor();
+                    
+                    try {
+                        const res = await fetch('http://127.0.0.1:5555/logs/signup', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({ username, email, password, profile: profileColor })
+                        });
+
+                        if (res.ok) {
+                            alert('Form submitted successfully!');
+                            resetForm();
+                        } else {
+                            alert('Failed to submit the form!');
+                        }
+                    } catch (error) {
+                        console.error('Error submitting the form:', error);
+                        alert('Error submitting the form!');
+                    }
+                    setSubmitting(false);
+                }}
+            >
+                {({ setFieldValue }) => (
+                    <Form className="sign-up-form">
+                        <h2>Registration Form</h2>
+                        <div className="input-container">
+                            <i className="fa fa-user icon"></i>
+                            <Field
+                                type="text"
+                                name="username"
+                                placeholder="Username"
+                                className="input-field"
+                            />
+                            <ErrorMessage name="username" component="p" className="error-message" />
+                        </div>
+                        <div className="input-container">
+                            <i className="fa fa-envelope icon"></i>
+                            <Field
+                                type="email"
+                                name="email"
+                                placeholder="Email"
+                                className="input-field"
+                            />
+                            <ErrorMessage name="email" component="p" className="error-message" />
+                        </div>
+                        <div className="input-container">
+                            <i className="fa fa-lock icon"></i>
+                            <Field
+                                type="password"
+                                name="password"
+                                placeholder="Password"
+                                className="input-field"
+                            />
+                            <ErrorMessage name="password" component="p" className="error-message" />
+                        </div>
+                        <div className="input-container">
+                            <i className="fa fa-lock icon"></i>
+                            <Field
+                                type="password"
+                                name="confirmPassword"
+                                placeholder="Confirm Password"
+                                className="input-field"
+                            />
+                            <ErrorMessage name="confirmPassword" component="p" className="error-message" />
+                        </div>
+                        <div className="input-container">
+                            <i className="fa fa-user-circle icon"></i>
+                            <Field
+                                type="text"
+                                name="profile"
+                                placeholder="Profile"
+                                className="input-field"
+                                onChange={(e) => setFieldValue('profile', e.target.value)}
+                            />
+                            <ErrorMessage name="profile" component="p" className="error-message" />
+                        </div>
+                        <button type="submit" className="register-btn">Register</button>
+                        <button
+                            type="button"
+                            className="reset-btn"
+                            onClick={() => {
+                                setFieldValue('username', '');
+                                setFieldValue('email', '');
+                                setFieldValue('password', '');
+                                setFieldValue('confirmPassword', '');
+                                setFieldValue('profile', '');
+                            }}
+                        >
+                            Reset
+                        </button>
+                    </Form>
+                )}
+            </Formik>
         </div>
     );
 };
