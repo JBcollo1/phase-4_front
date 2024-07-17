@@ -1,7 +1,7 @@
 # React + Vite
 
 
-#### Global Insight Hub
+# NovelNest
 # By 
   ##    Jorbat Kamau
   ##    Ace Mwangi Samuel
