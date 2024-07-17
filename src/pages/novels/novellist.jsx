@@ -17,7 +17,7 @@ const List = ({ novels }) => {
     const token = localStorage.getItem('access_token'); 
 
     if (!token || token.split('.').length !== 3) {
-      alert('Please log in');
+      alert('please login');
       return;
     }
 
@@ -48,40 +48,6 @@ const List = ({ novels }) => {
     }
   };
 
-  const deleteNovel = async (novelId) => {
-    const token = localStorage.getItem('access_token');
-  
-    if (!token || token.split('.').length !== 3) {
-      alert('Please log in');
-      return;
-    }
-  
-    try {
-      const response = await fetch(`https://phase-4-project-0zcg.onrender.com/novels/delete/${novelId}`, {
-        method: 'DELETE',
-        headers: {
-          'Authorization': `Bearer ${token}`
-        },
-      });
-  
-      if (!response.ok) {
-        const errorData = await response.json();
-        console.error('Error response from server:', errorData);
-        alert(errorData.msg || 'An error occurred');
-        return;
-      }
-  
-      const data = await response.json();
-      alert(data.msg);
-      
-      window.location.reload(); 
-    } catch (error) {
-      console.error('Error occurred while trying to delete novel:', error);
-      alert('An error occurred while trying to delete the novel. Please try again.');
-    }
-  };
-  
-
   if (!novels || novels.length === 0) {
     return <p>No novels available</p>; 
   }
@@ -105,7 +71,6 @@ const List = ({ novels }) => {
               <h2 className="novel-title">{novel.title}</h2>
               <p className="novel-genre"><strong>Genre:</strong> {novel.genre}</p>
               <button className="novel-button" onClick={() => addToCollection(novel.id)}>Add to Collection</button>
-              <button className="delete-button" onClick={() => deleteNovel(novel.id)}>Delete</button>
             </div>
           ))
         ) : (
