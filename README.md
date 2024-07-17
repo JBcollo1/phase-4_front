@@ -21,7 +21,16 @@ Feedback: one is able to view comments and also add on it to be seen by people f
 
 Live Link
 ```bash
- 
+ https://novelnesthub.netlify.app
+```
+backend link
+```bash
+https://github.com/JBcollo1/phase_4_project.git
+
+```
+backend live link
+```bash
+https://phase-4-project-0zcg.onrender.com
 ```
 ## Usage
 To use the  Novel nest application:
