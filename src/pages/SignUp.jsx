@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import './SignUp.css';
 
 const SignUp = () => {
+    const [isLoading, setIsLoading] = useState(false);
+
     const getRandomColor = () => {
         return '#' + Math.floor(Math.random() * 16777215).toString(16);
     };
@@ -52,6 +54,7 @@ const SignUp = () => {
                 }}
                 validate={validate}
                 onSubmit={async (values, { setSubmitting, resetForm }) => {
+                    setIsLoading(true);
                     const { username, email, password, profile } = values;
                     const profileColor = profile || getRandomColor();
                     
@@ -73,8 +76,10 @@ const SignUp = () => {
                     } catch (error) {
                         console.error('Error submitting the form:', error);
                         alert('Error submitting the form!');
+                    } finally {
+                        setIsLoading(false);
+                        setSubmitting(false);
                     }
-                    setSubmitting(false);
                 }}
             >
                 {({ setFieldValue }) => (
@@ -131,7 +136,9 @@ const SignUp = () => {
                             />
                             <ErrorMessage name="profile" component="p" className="error-message" />
                         </div>
-                        <button type="submit" className="register-btn">Register</button>
+                        <button type="submit" className="register-btn" disabled={isLoading}>
+                            {isLoading ? 'Registering...' : 'Register'}
+                        </button>
                         <button
                             type="button"
                             className="reset-btn"
